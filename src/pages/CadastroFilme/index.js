@@ -38,7 +38,7 @@ export default function CadastroFilme() {
             atualizaRegistros();
           },
           (_, error) => {
-            console.error("Erro ao adicionar filme:", error);
+            console.error("Erro ao adicionar o filme:", error);
             Alert.alert("Erro", "Ocorreu um erro ao adicionar o filme.");
           }
         );
@@ -49,7 +49,7 @@ export default function CadastroFilme() {
     } else if (operacao === "Editar") {
       db.transaction((tx) => {
         tx.executeSql(
-          "UPDATE clientes SET nome = ? WHERE id = ?",
+          "UPDATE filme SET nome = ? WHERE id = ?",
           [inputText, id],
           (_, { rowsAffected }) => {
             if (rowsAffected === 1)
@@ -61,7 +61,7 @@ export default function CadastroFilme() {
             atualizaRegistros();
             setOperacao("incluir");
           },
-          
+
           (_, error) => {
             console.error("Erro ao adicionar cliente:", error);
             Alert.alert("Erro", "Ocorreu um erro ao adicionar o cliente.");

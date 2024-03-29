@@ -9,7 +9,7 @@ export default function Home() {
     const navigation = usenavigation();
 
     const navegaPesquisaFilmes = () => {
-        navigation.navigate('PesquisaClientes');
+        navigation.navigate('PesquisaFilme');
     }
 
     const navegaExibirTodosFilmes = () => {
