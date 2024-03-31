@@ -1,52 +1,49 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
-import AdcionarFilmes from './src/pages/AdcionarFilmes'
-import EditarFilme from "./src/pages/EditarFilme";
-import ExibirTodosFilmes from './src/pages/ExibirTodosFilmes';
-import Home from "./src/pages/Home";
-import PesquisaFilme from "./src/pages/PesquisaFilme";
-import VisualizarFilmes from './src/pages/VisualizarFilme'
 
-import { createNativeStackNavigator } from "@react-navigation/bottom-tabs";
+import Home from "./src/pages/Home";
+import CadastraFilme from "./src/pages/CadastraFilme";
+import EditarFilme from "./src/pages/EditarFilme";
+import ExibirFilme from "./src/pages/ExibirFilme";
+import PesquisaFilme from "./src/pages/PesquisaFilme";
+import VisualizarFilme from "./src/pages/VisualizarFilme";
+
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarActiveTintColor: "red",
-          tabBarInactiveTintColor: "gray",
-          tabBarStyle: {
-            backgroundColor: "#fff",
-          },
-        }}
-      >
-        <Tab.Screen
-          name="Home"
-          component={StackRoutes}
-          options={{
-            title: "Tela Inicial",
-            headerTintColor: "red",
+    <NavigationContainer style={styles.container}>
 
-            headerStyle: {
-              backgroundColor: "green",
-            },
+      <Stack.Navigator>
 
-            tabBarIcon: ({ color = "red", size }) => {
-              return (
-                <FontAwesome name="home" color={"red"} size={size}>
-                  {" "}
-                </FontAwesome>
-              );
-            },
-          }}
-        />
-        
-      </Tab.Navigator>
+        <Tab.Screen name="Home" component={Home} />
+
+        <Tab.Screen name="CadastraFilme" component={CadastraFilme} />
+
+        <Tab.Screen name="EditarFilme" component={EditarFilme} />
+
+        <Tab.Screen name="ExibirFilme" component={ExibirFilme} />
+
+        <Tab.Screen name="PesquisaFilme" component={PesquisaFilme} />
+
+        <Tab.Screen name="VisualizarFilme" component={VisualizarFilme} />
+
+        </Stack.Navigator>
+
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+});
