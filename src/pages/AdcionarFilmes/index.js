@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,6 +9,8 @@ import {
   Alert,
   Button,
 } from "react-native";
+import { inserirFilme, intDatabase } from "../../database/database.js";
+import { usenavigation } from '@react-navigation/native'
 
 
 export default function CadastroFilme() {

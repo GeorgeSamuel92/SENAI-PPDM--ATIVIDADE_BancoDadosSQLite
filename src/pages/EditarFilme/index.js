@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Alert, Button } from "react-native";
-import { useNavigation, useRoute, StackActions } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { DatabaseConnection } from '../../database/database';
+
+const db = new DatabaseConnection.getConnections;
 
 if (operacao === "Editar") {
     db.transaction((tx) => {
