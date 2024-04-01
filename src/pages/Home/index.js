@@ -1,39 +1,102 @@
-import React, { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { styleSheet, Text, View, TouchableOpacity, TextInput, Alert, Button} from  'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { SafeAreaView} from   'react-native-safe-area-context';
+import {
+  SafeAreaView,
+  scrollWiew,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableOpacity,
+} from "react-native-safe-area-context";
+import { usenavigation } from "@react-navigation/native";
+
+const db = new DatabaseConnection.getConnection();
 
 export default function Home() {
 
-    const navigation = usenavigation();
+  const navigation = usenavigation();
 
-    const navegaPesquisaFilmes = () => {
-        navigation.navigate('PesquisaFilme');
-    }
+  useEffect(() => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `CREATE TABLE IF NOT EXISTS filmes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome_filmes TEXT NOT NULL,
+            genero TEXT NOT NULL,
+            classificacao TEXT NOT NULL,
+            data_cad  DATATIME DEFAULT (datetime('now', 'localtime'))
+         )`,
+        [],
+        () => console.log("Tabela criada com sucesso!"),
+        (_, error) => console.error(error)
+      );
+    });
+  }, []);
 
-    const navegaExibirTodosFilmes = () => {
-        navigation.navigate('ExibirTodosFilmes');
-    }
+  const navegaCadastrarFilme = () => {
+    navigation.navigate("CadastraFilme");
+  }
 
-    const navegaCadastrarFilme = () => {
-        navigation.navigate('navegaCadastrarFilme');
-    }
+  const navegaEditarFilme = () => {
+    navigation.navigate("EditarFilme");
+  }
 
-    const navegaEditarFilme = () => {
-        navigation.navigate('navegaEditarFilme');
-    }
+  const navegaExibirFilme = () => {
+    navigation.navigate("ExibirFilme");
+  }
 
-    return (
-        <SafeAreaView style={style.container}>
-            <Text> Tela HOME</Text>
+  const navegaPesquisaFilme= () => {
+    navigation.navigate("PesquisaFilme");
+  }
 
-            <Button  title='Abri pesquisa por Filme' onPress= 
-            { navegaPesquisaFilmes} style={styles.botao} />
 
-            <Button  title='Exibir catalogo de Filmes' onPress=
-            { navegaExibirTodosFilmes} style={styles.botao} />
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={style.title}> Tela HOME</Text>
+      <Button title='Cadastrar' onPress={navegaCadastrarFilme}> Cadastra</Button>
 
-        </SafeAreaView>
-    )
+      <Button title='Editar' onPress={navegaEditarFilme}>Editar</Button>
+
+      <Button title='Exibir' onPress={navegaExibirFilme}> Exibir</Button>
+
+      <Button title='Pesquisar' onPress={navegaPesquisaFilme}>Pesquisa</Button>
+
+    </SafeAreaView>
+  );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroudColor: '#ffffff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 20
+    },
+    header: {
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    title: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      marginTop: 10,
+  },
+  buttonContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      width: '100%',
+  },
+  button: {
+      backgroundColor: '#007bff',
+      paddingVertical: 15,
+      paddingHorizontal: 40,
+      borderRadius: 10,
+      marginBottom: 20,
+  },
+  buttonText: {
+      color: 'white',
+      fontSize: 18,
+      fontWeight: 'bold',
+      textAlign: 'center',
+  }
+})

@@ -1,25 +1,37 @@
-import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
+export default function ExibirFilme() {
 
-export default function ExibirTodosFilmes() {
+  const navigation = useNavigation();
 
-    const [todos, setTodos] = useState([]);
+  return (
+    <SafeAreaView style={styles.container}>
 
-    const ExibirTodosFilmes = () => {
-        try {
-          db.transaction((tx) => {
-            tx.executeSql(
-              "SELECT * FROM filmes",
-              [],
-              (_, { rows }) =>
+      <Text style={styles.title}>Todos os filmes cadastrados:</Text>
+      
+    </SafeAreaView>
 
-                setTodos(rows._array)
-            );
-          });
-        } catch (error) {
-          console.error("Erro ao buscar todos:", error);
-        }
-      };
+  );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "Center",
+  },
+  title: {
+    color: "black",
+  },
+  
+});

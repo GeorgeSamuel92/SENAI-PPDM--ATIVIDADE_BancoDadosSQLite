@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 
@@ -8,7 +8,6 @@ import CadastraFilme from "./src/pages/CadastraFilme";
 import EditarFilme from "./src/pages/EditarFilme";
 import ExibirFilme from "./src/pages/ExibirFilme";
 import PesquisaFilme from "./src/pages/PesquisaFilme";
-import VisualizarFilme from "./src/pages/VisualizarFilme";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -30,9 +29,7 @@ export default function App() {
 
         <Tab.Screen name="PesquisaFilme" component={PesquisaFilme} />
 
-        <Tab.Screen name="VisualizarFilme" component={VisualizarFilme} />
-
-        </Stack.Navigator>
+      </Stack.Navigator>
 
     </NavigationContainer>
   );
