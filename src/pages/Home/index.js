@@ -1,13 +1,11 @@
+import React, { useEffect } from "react";
 import {
   SafeAreaView,
-  scrollWiew,
   StyleSheet,
   Text,
-  View,
-  Button,
-  TouchableOpacity,
-} from "react-native-safe-area-context";
+  Button,} from "react-native";
 import { usenavigation } from "@react-navigation/native";
+import { DatabaseConnection } from '../../database/database';
 
 const db = new DatabaseConnection.getConnection();
 
@@ -29,7 +27,7 @@ export default function Home() {
         () => console.log("Tabela criada com sucesso!"),
         (_, error) => console.error(error)
       );
-    });
+    }, null);
   }, []);
 
   const navegaCadastrarFilme = () => {
